@@ -2,9 +2,9 @@
 
 namespace Fidum\LaravelTranslationFaker;
 
+use Fidum\LaravelTranslationFaker\Commands\LaravelTranslationFakerCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use Fidum\LaravelTranslationFaker\Commands\LaravelTranslationFakerCommand;
 
 class LaravelTranslationFakerServiceProvider extends PackageServiceProvider
 {

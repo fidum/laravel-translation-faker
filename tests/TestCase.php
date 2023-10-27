@@ -2,9 +2,9 @@
 
 namespace Fidum\LaravelTranslationFaker\Tests;
 
+use Fidum\LaravelTranslationFaker\LaravelTranslationFakerServiceProvider;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Orchestra\Testbench\TestCase as Orchestra;
-use Fidum\LaravelTranslationFaker\LaravelTranslationFakerServiceProvider;
 
 class TestCase extends Orchestra
 {
