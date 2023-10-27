@@ -2,6 +2,4 @@
 
 namespace Fidum\LaravelTranslationFaker\Contracts\Finders;
 
-interface LanguageNamespaceFinder extends Finder
-{
-}
+interface LanguageNamespaceFinder extends Finder {}

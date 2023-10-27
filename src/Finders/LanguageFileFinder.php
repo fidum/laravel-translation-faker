@@ -13,8 +13,7 @@ readonly class LanguageFileFinder implements LanguageFileFinderContract
     public function __construct(
         protected Filesystem $filesystem,
         protected LanguageFileReaderManager $manager,
-    ) {
-    }
+    ) {}
 
     public function execute(string $path, string $locale): Collection
     {

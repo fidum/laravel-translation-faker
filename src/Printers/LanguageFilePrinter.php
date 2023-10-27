@@ -12,9 +12,7 @@ class LanguageFilePrinter implements LanguageFilePrinterContract
 {
     protected const JSON_OPTIONS = JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE;
 
-    public function __construct(protected LanguageFilePrinterManager $manager)
-    {
-    }
+    public function __construct(protected LanguageFilePrinterManager $manager) {}
 
     public function execute(SplFileInfo $file, Collection $items): string
     {

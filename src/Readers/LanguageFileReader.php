@@ -10,9 +10,7 @@ use Symfony\Component\Finder\SplFileInfo;
 
 class LanguageFileReader implements LanguageFileReaderContract
 {
-    public function __construct(protected LanguageFileReaderManager $manager)
-    {
-    }
+    public function __construct(protected LanguageFileReaderManager $manager) {}
 
     public function execute(SplFileInfo $file): Collection
     {
