@@ -13,7 +13,7 @@ use Illuminate\Support\Manager;
  */
 class LanguageFileReaderManager extends Manager
 {
-    private const DRIVERS = [
+    protected const DRIVERS = [
         'json' => JsonLanguageFileReader::class,
         'php' => PhpLanguageFileReader::class,
     ];

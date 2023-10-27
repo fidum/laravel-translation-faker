@@ -13,7 +13,7 @@ use Illuminate\Support\Manager;
  */
 class LanguageFilePrinterManager extends Manager
 {
-    private const DRIVERS = [
+    protected const DRIVERS = [
         'json' => JsonLanguageFilePrinter::class,
         'php' => PhpLanguageFilePrinter::class,
     ];
