@@ -1,4 +1,4 @@
-# Generates pseudo language files from another locale for use of seeing what still needs translating.
+# Generates pseudo language files from another locale to make it easy to see what still needs translating.
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/fidum/laravel-translation-faker.svg?style=for-the-badge)](https://packagist.org/packages/fidum/laravel-translation-faker)
 [![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/fidum/laravel-translation-faker/run-tests.yml?branch=main&label=tests&style=for-the-badge)](https://github.com/fidum/laravel-translation-faker/actions?query=workflow%3Arun-tests+branch%3Amain)

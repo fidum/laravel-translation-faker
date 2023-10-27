@@ -1,6 +1,6 @@
 {
     "name": "fidum/laravel-translation-faker",
-    "description": "Generates pseudo language files from another locale for use of seeing what still needs translating.",
+    "description": "Generates pseudo language files from another locale to make it easy to see what still needs translating.",
     "keywords": [
         "fidum",
         "laravel",
