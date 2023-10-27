@@ -68,7 +68,7 @@ class FakeTranslationCommand extends Command
                 );
 
                 $translations = $reader
-                    ->getTranslations($file)
+                    ->execute($file)
                     ->dot()
                     ->mapWithKeys(fn ($langLine, $langKey) => [$langKey => $this->convertToUmlaut($replacers, $langLine)])
                     ->undot();

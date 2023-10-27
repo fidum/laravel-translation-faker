@@ -14,13 +14,13 @@ class LanguageFileReader implements LanguageFileReaderContract
     {
     }
 
-    public function getTranslations(SplFileInfo $file): Collection
+    public function execute(SplFileInfo $file): Collection
     {
         $extension = $file->getExtension();
         $translations = new Collection();
 
         if ($this->manager->isEnabled($extension)) {
-            $translations = $this->manager->driver($extension)->getTranslations($file);
+            $translations = $this->manager->driver($extension)->execute($file);
 
             if ($translations->isEmpty()) {
                 throw new InvalidArgumentException("Unable to extract any data from {$file->getPathname()}!");
