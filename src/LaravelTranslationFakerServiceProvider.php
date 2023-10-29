@@ -3,14 +3,17 @@
 namespace Fidum\LaravelTranslationFaker;
 
 use Fidum\LaravelTranslationFaker\Commands\FakeTranslationCommand;
+use Fidum\LaravelTranslationFaker\Contracts\Factories\LanguageOutputFactory as LanguageOutputFactoryContract;
 use Fidum\LaravelTranslationFaker\Contracts\Finders\LanguageFileFinder as LanguageFileFinderContract;
 use Fidum\LaravelTranslationFaker\Contracts\Finders\LanguageNamespaceFinder as LanguageNamespaceFinderContract;
 use Fidum\LaravelTranslationFaker\Contracts\Printers\LanguageFilePrinter as LanguageFilePrinterContract;
 use Fidum\LaravelTranslationFaker\Contracts\Readers\LanguageFileReader as LanguageFileReaderContract;
+use Fidum\LaravelTranslationFaker\Factories\LanguageOutputFactory;
 use Fidum\LaravelTranslationFaker\Finders\LanguageFileFinder;
 use Fidum\LaravelTranslationFaker\Finders\LanguageNamespaceFinder;
 use Fidum\LaravelTranslationFaker\Managers\LanguageFilePrinterManager;
 use Fidum\LaravelTranslationFaker\Managers\LanguageFileReaderManager;
+use Fidum\LaravelTranslationFaker\Managers\LanguageOutputFilenameFactoryManager;
 use Fidum\LaravelTranslationFaker\Printers\LanguageFilePrinter;
 use Fidum\LaravelTranslationFaker\Readers\LanguageFileReader;
 use Illuminate\Contracts\Support\DeferrableProvider;
@@ -36,6 +39,10 @@ class LaravelTranslationFakerServiceProvider extends PackageServiceProvider impl
         $this->app->bind(LanguageFileReaderContract::class, LanguageFileReader::class);
 
         $this->app->scoped(LanguageFilePrinterManager::class, LanguageFilePrinterManager::class);
+
+        $this->app->bind(LanguageOutputFactoryContract::class, LanguageOutputFactory::class);
+
+        $this->app->scoped(LanguageOutputFilenameFactoryManager::class, LanguageOutputFilenameFactoryManager::class);
 
         $this->app->scoped(LanguageFileReaderManager::class, LanguageFileReaderManager::class);
 

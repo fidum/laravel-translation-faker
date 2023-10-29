@@ -2,6 +2,7 @@
 
 namespace Fidum\LaravelTranslationFaker\Commands;
 
+use Fidum\LaravelTranslationFaker\Contracts\Factories\LanguageOutputFactory;
 use Fidum\LaravelTranslationFaker\Contracts\Finders\LanguageFileFinder;
 use Fidum\LaravelTranslationFaker\Contracts\Printers\LanguageFilePrinter;
 use Fidum\LaravelTranslationFaker\Finders\LanguageNamespaceFinder;
@@ -26,6 +27,7 @@ class FakeTranslationCommand extends Command
         LanguageFilePrinter $printer,
         LanguageFileReader $reader,
         LanguageNamespaceFinder $namespaceFinder,
+        LanguageOutputFactory $factory,
         Filesystem $filesystem,
     ): int {
         $locale = $this->argument('locale');
@@ -46,24 +48,12 @@ class FakeTranslationCommand extends Command
 
             /** @var SplFileInfo $file */
             foreach ($files as $file) {
-                $outputFilename = "$locale.json";
-
-                $outputDirectory = Str::of($file->getPath())
-                    ->finish(DIRECTORY_SEPARATOR)
-                    ->replace(
-                        [DIRECTORY_SEPARATOR.$baseLocale.DIRECTORY_SEPARATOR, "$baseLocale.json"],
-                        [DIRECTORY_SEPARATOR.$locale.DIRECTORY_SEPARATOR, $outputFilename],
-                    )->before($outputFilename)->toString();
-
-                $outputPath = Str::of($file->getPathname())
-                    ->replace(
-                        [DIRECTORY_SEPARATOR.$baseLocale.DIRECTORY_SEPARATOR, "$baseLocale.json"],
-                        [DIRECTORY_SEPARATOR.$locale.DIRECTORY_SEPARATOR, $outputFilename],
-                    )->toString();
+                $outputPath = $factory->getPath($file, $baseLocale, $locale);
+                $outputPathname = $factory->getPathname($file, $baseLocale, $locale);
 
                 $this->components->task(
-                    "Ensuring directory exists $outputDirectory",
-                    fn () => $filesystem->ensureDirectoryExists($outputDirectory),
+                    "Ensuring directory exists $outputPath",
+                    fn () => $filesystem->ensureDirectoryExists($outputPath),
                     OutputInterface::VERBOSITY_DEBUG,
                 );
 
@@ -74,8 +64,8 @@ class FakeTranslationCommand extends Command
                     ->undot();
 
                 $this->components->task(
-                    "Writing to $outputPath",
-                    fn () => $filesystem->put($outputPath, $printer->execute($file, $translations)),
+                    "Writing to $outputPathname",
+                    fn () => $filesystem->put($outputPathname, $printer->execute($file, $translations)),
                     OutputInterface::VERBOSITY_DEBUG,
                 );
             }
