@@ -2,9 +2,9 @@
 
 namespace Fidum\LaravelTranslationFaker\Printers;
 
+use Fidum\LaravelTranslationFaker\Contracts\Collections\TranslationCollection as TranslationCollectionContract;
 use Fidum\LaravelTranslationFaker\Contracts\Printers\LanguageFilePrinter as LanguageFilePrinterContract;
 use Fidum\LaravelTranslationFaker\Managers\LanguageFilePrinterManager;
-use Illuminate\Support\Collection;
 use InvalidArgumentException;
 use Symfony\Component\Finder\SplFileInfo;
 
@@ -14,7 +14,7 @@ class LanguageFilePrinter implements LanguageFilePrinterContract
 
     public function __construct(protected LanguageFilePrinterManager $manager) {}
 
-    public function execute(SplFileInfo $file, Collection $items): string
+    public function execute(SplFileInfo $file, TranslationCollectionContract $items): string
     {
         $extension = $file->getExtension();
         $translations = '';

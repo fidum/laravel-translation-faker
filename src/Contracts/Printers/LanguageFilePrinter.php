@@ -2,10 +2,10 @@
 
 namespace Fidum\LaravelTranslationFaker\Contracts\Printers;
 
-use Illuminate\Support\Collection;
+use Fidum\LaravelTranslationFaker\Contracts\Collections\TranslationCollection as TranslationCollectionContract;
 use Symfony\Component\Finder\SplFileInfo;
 
 interface LanguageFilePrinter
 {
-    public function execute(SplFileInfo $file, Collection $items): string;
+    public function execute(SplFileInfo $file, TranslationCollectionContract $items): string;
 }

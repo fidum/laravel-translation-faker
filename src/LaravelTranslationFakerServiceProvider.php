@@ -75,6 +75,7 @@ class LaravelTranslationFakerServiceProvider extends PackageServiceProvider impl
             LanguageFileReaderManager::class,
             LanguageNamespaceFinderContract::class,
             ReplacerCollectionContract::class,
+            TranslationCollectionContract::class,
         ];
     }
 }

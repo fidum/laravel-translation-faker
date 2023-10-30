@@ -2,13 +2,13 @@
 
 namespace Fidum\LaravelTranslationFaker\Printers;
 
+use Fidum\LaravelTranslationFaker\Contracts\Collections\TranslationCollection as TranslationCollectionContract;
 use Fidum\LaravelTranslationFaker\Contracts\Printers\LanguageFilePrinter as LanguageFilePrinterContract;
-use Illuminate\Support\Collection;
 use Symfony\Component\Finder\SplFileInfo;
 
 class PhpLanguageFilePrinter implements LanguageFilePrinterContract
 {
-    public function execute(SplFileInfo $file, Collection $items): string
+    public function execute(SplFileInfo $file, TranslationCollectionContract $items): string
     {
         $body = $this->build($items->toArray(), 1);
 

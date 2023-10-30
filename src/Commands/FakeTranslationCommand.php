@@ -22,21 +22,20 @@ class FakeTranslationCommand extends Command
     public $description = 'Generates pseudo language files from another locale to make it easy to see what still needs translating.';
 
     public function handle(
-        LanguageFileFinder $finder,
+        Filesystem $filesystem,
+        LanguageFileFinder $languageFileFinder,
         LanguageFilePrinter $printer,
         LanguageFileReader $reader,
         LanguageNamespaceFinder $namespaceFinder,
         LanguageOutputFactory $factory,
-        Filesystem $filesystem,
         ReplacerCollection $replacers,
     ): int {
         $locale = $this->argument('locale');
         $baseLocale = $this->option('baseLocale') ?: config('translation-faker.default');
         $converter = $replacers->toConverterCollection($baseLocale);
-        $namespaces = $namespaceFinder->execute();
 
-        foreach ($namespaces as $path) {
-            $files = $finder->execute($path, $baseLocale);
+        foreach ($namespaceFinder->execute() as $path) {
+            $files = $languageFileFinder->execute($path, $baseLocale);
 
             /** @var SplFileInfo $file */
             foreach ($files as $file) {
