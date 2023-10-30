@@ -2,6 +2,7 @@
 
 namespace Fidum\LaravelTranslationFaker\Readers;
 
+use Fidum\LaravelTranslationFaker\Contracts\Collections\TranslationCollection as TranslationCollectionContract;
 use Fidum\LaravelTranslationFaker\Contracts\Readers\LanguageFileReader as LanguageFileReaderContract;
 use Fidum\LaravelTranslationFaker\Managers\LanguageFileReaderManager;
 use Illuminate\Support\Collection;
@@ -10,9 +11,12 @@ use Symfony\Component\Finder\SplFileInfo;
 
 class LanguageFileReader implements LanguageFileReaderContract
 {
-    public function __construct(protected LanguageFileReaderManager $manager) {}
+    public function __construct(
+        protected LanguageFileReaderManager $manager,
+        protected TranslationCollectionContract $translations,
+    ) {}
 
-    public function execute(SplFileInfo $file): Collection
+    public function execute(SplFileInfo $file): TranslationCollectionContract
     {
         $extension = $file->getExtension();
         $translations = new Collection();
@@ -25,6 +29,6 @@ class LanguageFileReader implements LanguageFileReaderContract
             }
         }
 
-        return $translations;
+        return $this->translations->merge($translations);
     }
 }

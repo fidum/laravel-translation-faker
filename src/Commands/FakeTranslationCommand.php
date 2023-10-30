@@ -2,6 +2,7 @@
 
 namespace Fidum\LaravelTranslationFaker\Commands;
 
+use Fidum\LaravelTranslationFaker\Contracts\Collections\ReplacerCollection;
 use Fidum\LaravelTranslationFaker\Contracts\Factories\LanguageOutputFactory;
 use Fidum\LaravelTranslationFaker\Contracts\Finders\LanguageFileFinder;
 use Fidum\LaravelTranslationFaker\Contracts\Printers\LanguageFilePrinter;
@@ -9,8 +10,6 @@ use Fidum\LaravelTranslationFaker\Finders\LanguageNamespaceFinder;
 use Fidum\LaravelTranslationFaker\Readers\LanguageFileReader;
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
-use Illuminate\Support\Arr;
-use Illuminate\Support\Str;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Finder\SplFileInfo;
 
@@ -20,7 +19,7 @@ class FakeTranslationCommand extends Command
         {locale : The output locale to store faked language files.}
         {--b|baseLocale= : The base locale to copy language files from.}';
 
-    public $description = 'My command';
+    public $description = 'Generates pseudo language files from another locale to make it easy to see what still needs translating.';
 
     public function handle(
         LanguageFileFinder $finder,
@@ -29,19 +28,12 @@ class FakeTranslationCommand extends Command
         LanguageNamespaceFinder $namespaceFinder,
         LanguageOutputFactory $factory,
         Filesystem $filesystem,
+        ReplacerCollection $replacers,
     ): int {
         $locale = $this->argument('locale');
         $baseLocale = $this->option('baseLocale') ?: config('translation-faker.default');
-        $replacers = Arr::wrap(config('translation-faker.replacers'));
+        $converter = $replacers->toConverterCollection($baseLocale);
         $namespaces = $namespaceFinder->execute();
-
-        if (! array_key_exists($baseLocale, $replacers)) {
-            $this->components->error("Please add $baseLocale base locale to replacer configuration.");
-
-            return self::FAILURE;
-        }
-
-        $replacers = $replacers[$baseLocale];
 
         foreach ($namespaces as $path) {
             $files = $finder->execute($path, $baseLocale);
@@ -54,19 +46,15 @@ class FakeTranslationCommand extends Command
                 $this->components->task(
                     "Ensuring directory exists $outputPath",
                     fn () => $filesystem->ensureDirectoryExists($outputPath),
-                    OutputInterface::VERBOSITY_DEBUG,
+                    OutputInterface::VERBOSITY_VERBOSE,
                 );
 
-                $translations = $reader
-                    ->execute($file)
-                    ->dot()
-                    ->mapWithKeys(fn ($langLine, $langKey) => [$langKey => $this->convertToUmlaut($replacers, $langLine)])
-                    ->undot();
+                $translations = $reader->execute($file)->convert($converter);
 
                 $this->components->task(
                     "Writing to $outputPathname",
                     fn () => $filesystem->put($outputPathname, $printer->execute($file, $translations)),
-                    OutputInterface::VERBOSITY_DEBUG,
+                    OutputInterface::VERBOSITY_VERBOSE,
                 );
             }
         }
@@ -74,14 +62,5 @@ class FakeTranslationCommand extends Command
         $this->components->info("Translations successfully generated from '$baseLocale' to '$locale'.");
 
         return self::SUCCESS;
-    }
-
-    private function convertToUmlaut(array $replacers, string $text): string
-    {
-        $str = Str::of($text)->explode(' ')->map(fn ($string) => Str::match('/:\w+/', $string)
-            ? $string
-            : Str::replace(array_keys($replacers), array_values($replacers), $string));
-
-        return $str->implode(' ');
     }
 }

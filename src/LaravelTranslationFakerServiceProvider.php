@@ -2,7 +2,13 @@
 
 namespace Fidum\LaravelTranslationFaker;
 
+use Fidum\LaravelTranslationFaker\Collections\ConverterCollection;
+use Fidum\LaravelTranslationFaker\Collections\ReplacerCollection;
+use Fidum\LaravelTranslationFaker\Collections\TranslationCollection;
 use Fidum\LaravelTranslationFaker\Commands\FakeTranslationCommand;
+use Fidum\LaravelTranslationFaker\Contracts\Collections\ConverterCollection as ConverterCollectionContract;
+use Fidum\LaravelTranslationFaker\Contracts\Collections\ReplacerCollection as ReplacerCollectionContract;
+use Fidum\LaravelTranslationFaker\Contracts\Collections\TranslationCollection as TranslationCollectionContract;
 use Fidum\LaravelTranslationFaker\Contracts\Factories\LanguageOutputFactory as LanguageOutputFactoryContract;
 use Fidum\LaravelTranslationFaker\Contracts\Finders\LanguageFileFinder as LanguageFileFinderContract;
 use Fidum\LaravelTranslationFaker\Contracts\Finders\LanguageNamespaceFinder as LanguageNamespaceFinderContract;
@@ -32,6 +38,8 @@ class LaravelTranslationFakerServiceProvider extends PackageServiceProvider impl
 
     public function registeringPackage()
     {
+        $this->app->bind(ConverterCollectionContract::class, ConverterCollection::class);
+
         $this->app->bind(LanguageFileFinderContract::class, LanguageFileFinder::class);
 
         $this->app->bind(LanguageFilePrinterContract::class, LanguageFilePrinter::class);
@@ -47,17 +55,26 @@ class LaravelTranslationFakerServiceProvider extends PackageServiceProvider impl
         $this->app->scoped(LanguageFileReaderManager::class, LanguageFileReaderManager::class);
 
         $this->app->bind(LanguageNamespaceFinderContract::class, LanguageNamespaceFinder::class);
+
+        $this->app->bind(ReplacerCollectionContract::class, ReplacerCollection::class);
+        $this->app->when(ReplacerCollection::class)
+            ->needs('$items')
+            ->giveConfig('translation-faker.replacers');
+
+        $this->app->bind(TranslationCollectionContract::class, TranslationCollection::class);
     }
 
     public function provides()
     {
         return [
+            ConverterCollectionContract::class,
             LanguageFileFinderContract::class,
             LanguageFilePrinterContract::class,
             LanguageFileReaderContract::class,
             LanguageFilePrinterManager::class,
             LanguageFileReaderManager::class,
             LanguageNamespaceFinderContract::class,
+            ReplacerCollectionContract::class,
         ];
     }
 }

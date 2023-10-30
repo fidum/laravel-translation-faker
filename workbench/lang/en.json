@@ -1,8 +1,4 @@
 {
-    "Used PHP Class": "I am used in php class",
-    "Unused PHP Class": "I am unused in php class",
-    "Used Blade File": "I am used in blade",
-    "Unused Blade File": "I am unused in blade",
-    "Used Vue Component": "I am used in vue component",
-    "Unused Vue Component": "I am unused in vue component"
+    "Quite sure we don't have a placeholder in this sentence": "Quite sure we don't have a placeholder in this sentence",
+    "Quite sure we have a \":placeholder\" and a :different_placeholder and another in brackets (Something:something_placeholder)": "Quite sure we have a \",:placeholder\", and another in brackets (Something:something_placeholder)"
 }

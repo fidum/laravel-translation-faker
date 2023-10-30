@@ -2,10 +2,10 @@
 
 namespace Fidum\LaravelTranslationFaker\Contracts\Readers;
 
-use Illuminate\Support\Collection;
+use Fidum\LaravelTranslationFaker\Contracts\Collections\TranslationCollection as TranslationCollectionContract;
 use Symfony\Component\Finder\SplFileInfo;
 
 interface LanguageFileReader
 {
-    public function execute(SplFileInfo $file): Collection;
+    public function execute(SplFileInfo $file): TranslationCollectionContract;
 }

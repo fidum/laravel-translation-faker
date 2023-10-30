@@ -6,7 +6,8 @@
 [![Total Downloads](https://img.shields.io/packagist/dt/fidum/laravel-translation-faker.svg?style=for-the-badge)](https://packagist.org/packages/fidum/laravel-translation-faker)
 [![Twitter Follow](https://img.shields.io/badge/follow-%40danmasonmp-1DA1F2?logo=twitter&style=for-the-badge)](https://twitter.com/danmasonmp)
 
-This is where your description should go. Limit it to a paragraph or two. Consider adding a small example.
+Having a fake language that reads in your native language can make it easier to keep tracking of what is 
+missing translation as you make changes to your project.
 
 ## Installation
 
@@ -16,37 +17,73 @@ You can install the package via composer:
 composer require fidum/laravel-translation-faker
 ```
 
-You can publish and run the migrations with:
-
-```bash
-php artisan vendor:publish --tag="laravel-translation-faker-migrations"
-php artisan migrate
-```
-
 You can publish the config file with:
 
 ```bash
 php artisan vendor:publish --tag="laravel-translation-faker-config"
 ```
 
-This is the contents of the published config file:
+[Click here to see the contents of the config file](config/translation-faker.php).
 
-```php
-return [
-];
-```
-
-Optionally, you can publish the views using
-
-```bash
-php artisan vendor:publish --tag="laravel-translation-faker-views"
-```
+You should read through the config, which serves as additional documentation and make changes as needed.
 
 ## Usage
 
-```php
-$laravelTranslationFaker = new Fidum\LaravelTranslationFaker();
-echo $laravelTranslationFaker->echoPhrase('Hello, Fidum!');
+Just simply run the command with the first argument being the fake locale name you want to use.
+
+```sh
+$ php artisan translation:fake --help
+
+Usage:
+  translation:fake [options] [--] <locale>
+
+Arguments:
+  locale                         The output locale to store faked language files.
+
+Options:
+  -b, --baseLocale[=BASELOCALE]  The base locale to copy language files from.
+  ...
+  -v|vv|vvv, --verbose           Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug
+```
+
+If you are going to display this fake language on your system and are planning to also use the locale
+to control date / currency formats then I recommend that you use a real locale as your fake language.
+
+For example, below our fake language will be generated using the danish `da` locale:
+```sh
+$ php artisan translation:fake da
+
+   INFO  Translations successfully generated from 'en' to 'da'.  
+
+```
+
+By default the locale the command will come from will be from the`translation-faker.default` value 
+(which is defaulted to `en`).
+
+If you want to use a different base locale when running the command then you can provide it using the 
+`--baseLocale=de` or shorthand `--bde`.
+
+```sh
+$ php artisan translation:fake da --baseLocale=de
+
+   INFO  Translations successfully generated from 'de' to 'da'.  
+
+```
+**Note:** You must configure your replacer for the custom locale in `translation-faker.replacers` config.
+
+You can get more verbose output using the `-v` option:
+```sh
+$ php artisan translation:fake da -v
+
+Ensuring directory exists lang/ ......................................................................................................... 0ms DONE
+Writing to lang/da.json ................................................................................................................. 0ms DONE
+Ensuring directory exists lang/da/ ...................................................................................................... 0ms DONE
+Writing to lang/da/example.php .......................................................................................................... 0ms DONE
+Ensuring directory exists lang/da/folder/ ............................................................................................... 0ms DONE
+Writing to lang/da/folder/example.php ................................................................................................... 0ms DONE
+
+INFO  Translations successfully generated from 'en' to 'da'.  
+
 ```
 
 ## Testing

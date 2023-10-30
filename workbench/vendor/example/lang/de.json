@@ -1,8 +1,4 @@
 {
-    "Used Vendor PHP Class": "Ich werde in einer PHP-Klasse verwendet",
-    "Unused Vendor PHP Class": "Ich werde in einer PHP-Klasse nicht verwendet",
-    "Used Vendor Blade File": "Ich werde in Blade verwendet",
-    "Unused Vendor Blade File": "Ich werde in Blade nicht verwendet",
-    "Used Vendor Vue Component": "Ich werde in einem Vue-Komponenten verwendet",
-    "Unused Vendor Vue Component": "Ich werde in einem Vue-Komponenten nicht verwendet"
+    "Quite sure we don't have a placeholder in this sentence": "Ziemlich sicher haben keinen Platzhalter in diesem Satz",
+    "Quite sure we have a \":placeholder\" and a :different_placeholder and another in brackets (Something:something_placeholder)": "Ziemlich sicher haben einen \":placeholder\" und einen :different_placeholder und einen anderen in Klammern (etwas:something_placeholder)"
 }

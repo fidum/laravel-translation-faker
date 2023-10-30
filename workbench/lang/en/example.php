@@ -1,20 +1,10 @@
 <?php
 
 return [
-    'used' => 'I am used in php with a :placeholder and another in brackets (Something:placeholder)',
-    'unused' => 'I am unused in php class',
-    'blade' => [
-        'choice' => [
-            'used' => 'I am used in blade',
-            'unused' => 'I am unused in blade',
-        ],
-        'lang' => [
-            'used' => 'I am used in blade',
-            'unused' => 'I am unused in blade',
-        ],
-    ],
-    'vue' => [
-        'used' => 'I am used in vue component',
-        'unused' => 'I am unused in vue component',
+    'without_placeholder' => 'Quite sure we don\'t have a placeholder in this sentence',
+    'with_placeholder' => 'Quite sure we have a ":placeholder" and a :different_placeholder and another in brackets (Something:something_placeholder)',
+    'nested' => [
+        'without_placeholder' => 'Quite sure we don\'t have a placeholder in this sentence in nested array.',
+        'with_placeholder' => 'Quite sure we have a ":placeholder" and a :different_placeholder and another in brackets (Something:something_placeholder) in nested array',
     ],
 ];
