@@ -1,10 +1,10 @@
 <?php
 
 return [
-    'without_placeholder' => 'Cheese sandwich haben keinen platzhalter in diesem Satz',
-    'with_placeholder' => 'Cheese sandwich haben einen ":placeholder" und einen :different_placeholder und einen anderen in Klammern (Etwas:something_placeholder)',
+    'without_placeholder' => 'Cheese sandwich haben keinen platzhalter in diesem Satz.',
+    'with_placeholder' => 'Cheese sandwich haben einen ":placeholder" und einen :different_placeholder und einen anderen in Klammern (Etwas:something_placeholder).',
     'nested' => [
-        'without_placeholder' => 'Cheese sandwich haben keinen platzhalter in diesem Satz im verschachtelten Array',
-        'with_placeholder' => 'Cheese sandwich haben einen ":placeholder" und einen :different_placeholder und einen anderen in Klammern (Etwas:something_placeholder) im verschachtelten Array',
+        'without_placeholder' => 'Cheese sandwich haben keinen platzhalter in diesem Satz im verschachtelten Array.',
+        'with_placeholder' => 'Cheese sandwich haben einen ":placeholder" und einen :different_placeholder und einen anderen in Klammern (Etwas:something_placeholder) im verschachtelten Array.',
     ],
 ];

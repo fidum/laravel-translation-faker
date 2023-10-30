@@ -77,6 +77,11 @@ function assertGeneratedFiles()
             ->and(file_get_contents($file))
             ->toMatchSnapshot();
     }
+
+    expect(array_merge(
+        glob(workbench_path('vendor/example/lang/da/*.*')),
+        glob(workbench_path('vendor/example/lang/da/**/*.*')),
+    ))->toBeEmpty();
 }
 
 function files(): array
@@ -84,11 +89,11 @@ function files(): array
     return array_merge(
         glob(lang_path('da/*.*')),
         glob(lang_path('da/**/*.*')),
-        glob(workbench_path('vendor/example/lang/da/*.*')),
-        glob(workbench_path('vendor/example/lang/da/**/*.*')),
+        glob(lang_path('vendor/example/da/*.*')),
+        glob(lang_path('vendor/example/da/**/*.*')),
         [
             lang_path('da.json'),
-            workbench_path('vendor/example/lang/da.json'),
+            lang_path('vendor/example/da.json'),
         ],
     );
 }

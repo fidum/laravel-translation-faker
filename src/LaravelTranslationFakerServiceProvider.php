@@ -4,11 +4,9 @@ namespace Fidum\LaravelTranslationFaker;
 
 use Fidum\LaravelTranslationFaker\Collections\ConverterCollection;
 use Fidum\LaravelTranslationFaker\Collections\ReplacerCollection;
-use Fidum\LaravelTranslationFaker\Collections\TranslationCollection;
 use Fidum\LaravelTranslationFaker\Commands\FakeTranslationCommand;
 use Fidum\LaravelTranslationFaker\Contracts\Collections\ConverterCollection as ConverterCollectionContract;
 use Fidum\LaravelTranslationFaker\Contracts\Collections\ReplacerCollection as ReplacerCollectionContract;
-use Fidum\LaravelTranslationFaker\Contracts\Collections\TranslationCollection as TranslationCollectionContract;
 use Fidum\LaravelTranslationFaker\Contracts\Factories\LanguageOutputFactory as LanguageOutputFactoryContract;
 use Fidum\LaravelTranslationFaker\Contracts\Finders\LanguageFileFinder as LanguageFileFinderContract;
 use Fidum\LaravelTranslationFaker\Contracts\Finders\LanguageNamespaceFinder as LanguageNamespaceFinderContract;
@@ -60,8 +58,6 @@ class LaravelTranslationFakerServiceProvider extends PackageServiceProvider impl
         $this->app->when(ReplacerCollection::class)
             ->needs('$items')
             ->giveConfig('translation-faker.replacers');
-
-        $this->app->bind(TranslationCollectionContract::class, TranslationCollection::class);
     }
 
     public function provides()
@@ -75,7 +71,6 @@ class LaravelTranslationFakerServiceProvider extends PackageServiceProvider impl
             LanguageFileReaderManager::class,
             LanguageNamespaceFinderContract::class,
             ReplacerCollectionContract::class,
-            TranslationCollectionContract::class,
         ];
     }
 }

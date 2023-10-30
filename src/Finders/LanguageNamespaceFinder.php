@@ -18,11 +18,13 @@ readonly class LanguageNamespaceFinder implements LanguageNamespaceFinderContrac
         $loader = $this->translator->getLoader();
 
         foreach ($loader->namespaces() as $hint => $path) {
-            $namespacesCollection->put($hint, $path);
+            if (str_starts_with($path, lang_path())) {
+                $namespacesCollection->put($hint, $path);
+            }
         }
 
         // Add default namespace
-        $namespacesCollection->put('', app()->langPath());
+        $namespacesCollection->put('', lang_path());
 
         // Return namespaces collection after removing non existing paths
         return $namespacesCollection->filter(function ($path) {
