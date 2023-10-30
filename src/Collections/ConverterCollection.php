@@ -14,7 +14,7 @@ class ConverterCollection extends Collection implements ConverterCollectionContr
         $keys = $sorted->keys()->toArray();
         $pattern = sprintf('/:([a-zA-Z0-9_]+)|(%s)/', implode('|', array_map('preg_quote', $keys)));
 
-        return Str::replaceMatches($pattern, function ($match) use ($sorted) {
+        return preg_replace_callback($pattern, function ($match) use ($sorted) {
             return $sorted->get($match[0]) ?? $match[0];
         }, $text);
     }
