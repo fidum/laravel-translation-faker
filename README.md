@@ -20,7 +20,7 @@ composer require fidum/laravel-translation-faker
 You can publish the config file with:
 
 ```bash
-php artisan vendor:publish --tag="laravel-translation-faker-config"
+php artisan vendor:publish --tag="translation-faker-config"
 ```
 
 [Click here to see the contents of the config file](config/translation-faker.php).
