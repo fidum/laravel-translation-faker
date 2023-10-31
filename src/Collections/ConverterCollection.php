@@ -21,7 +21,7 @@ class ConverterCollection extends Collection implements ConverterCollectionContr
         return preg_replace_callback($pattern, fn ($match) => collect([
             'placeholder' => $match[1] ?? null,
             'htmlTag' => $match[2] ?? null,
-            'replaceable' => $sorted->get($match[0]) ?: $match[0]
+            'replaceable' => $sorted->get($match[0]) ?: $match[0],
         ])->filter()->first(), $text);
     }
 }
