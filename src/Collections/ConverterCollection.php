@@ -13,25 +13,15 @@ class ConverterCollection extends Collection implements ConverterCollectionContr
         $sorted = $this->sortBy(fn ($value, $key) => [Str::length($key), $key]);
         $keys = $sorted->keys()->toArray();
 
-        // Create a regex pattern that matches placeholders and HTML tags
         $pattern = sprintf(
             '/(:[A-z0-9_]+)|(<[^>]*>)|(%s)/',
             implode('|', array_map('preg_quote', $keys))
         );
 
-        return preg_replace_callback($pattern, function ($match) use ($sorted) {
-            // If it's a placeholder, leave it as is
-            if (! empty($match[1])) {
-                return $match[1];
-            }
-
-            // If it's an HTML tag, preserve it
-            if (! empty($match[2])) {
-                return $match[2];
-            }
-
-            // Otherwise, perform the replacements
-            return $sorted->get($match[0]) ?: $match[0];
-        }, $text);
+        return preg_replace_callback($pattern, fn ($match) => collect([
+            'placeholder' => $match[1] ?? null,
+            'htmlTag' => $match[2] ?? null,
+            'replaceable' => $sorted->get($match[0]) ?: $match[0]
+        ])->filter()->first(), $text);
     }
 }
