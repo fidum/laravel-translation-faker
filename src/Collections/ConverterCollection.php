@@ -10,17 +10,28 @@ class ConverterCollection extends Collection implements ConverterCollectionContr
 {
     public function convert(string $text): string
     {
-        $sorted = $this->sortKeysByLength();
+        $sorted = $this->sortBy(fn ($value, $key) => [Str::length($key), $key]);
         $keys = $sorted->keys()->toArray();
-        $pattern = sprintf('/:([a-zA-Z0-9_]+)|(%s)/', implode('|', array_map('preg_quote', $keys)));
+
+        // Create a regex pattern that matches placeholders and HTML tags
+        $pattern = sprintf(
+            '/(:[A-z0-9_]+)|(<[^>]*>)|(%s)/',
+            implode('|', array_map('preg_quote', $keys))
+        );
 
         return preg_replace_callback($pattern, function ($match) use ($sorted) {
-            return $sorted->get($match[0]) ?? $match[0];
-        }, $text);
-    }
+            // If it's a placeholder, leave it as is
+            if (! empty($match[1])) {
+                return $match[1];
+            }
 
-    private function sortKeysByLength(): static
-    {
-        return $this->sort(fn ($a, $b) => [Str::length($b) - Str::length($a), $a]);
+            // If it's an HTML tag, preserve it
+            if (! empty($match[2])) {
+                return $match[2];
+            }
+
+            // Otherwise, perform the replacements
+            return $sorted->get($match[0]) ?: $match[0];
+        }, $text);
     }
 }

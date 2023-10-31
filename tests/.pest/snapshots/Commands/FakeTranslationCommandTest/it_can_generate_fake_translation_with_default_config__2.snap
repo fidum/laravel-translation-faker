@@ -3,8 +3,10 @@
 return [
     'without_placeholder' => 'Qüïtë sürë wë dön\'t hävë ä pläcëhöldër ïn thïs sëntëncë.',
     'with_placeholder' => 'Qüïtë sürë wë hävë ä ":placeholder" änd ä :different_placeholder änd änöthër ïn bräckëts (Sömëthïng:something_placeholder).',
+    'html' => 'Thänk-yöü <strong>:name</strong> för yöür <a href=":order_url">pürchäsë (Ördër ÏD: :order_id)</a>.',
     'nested' => [
         'without_placeholder' => 'Qüïtë sürë wë dön\'t hävë ä pläcëhöldër ïn thïs sëntëncë ïn nëstëd ärräy.',
         'with_placeholder' => 'Qüïtë sürë wë hävë ä ":placeholder" änd ä :different_placeholder änd änöthër ïn bräckëts (Sömëthïng:something_placeholder) ïn nëstëd ärräy.',
+        'html' => 'Thänk-yöü <strong>:name</strong> för yöür <a href=":order_url">pürchäsë (Ördër ÏD: :order_id)</a> ïn nëstëd ärräy.',
     ],
 ];

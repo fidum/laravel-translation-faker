@@ -7,6 +7,10 @@ use function Orchestra\Testbench\workbench_path;
 use function Pest\Laravel\artisan;
 use function Pest\Laravel\withoutMockingConsoleOutput;
 
+beforeEach(function () {
+    withoutMockingConsoleOutput();
+});
+
 afterEach(function () {
     // Clean up files
     $files = app(Filesystem::class);
@@ -16,28 +20,28 @@ afterEach(function () {
     }
 
     $files->deleteDirectory(lang_path('da'));
-    $files->deleteDirectory(workbench_path('vendor/example/lang/da'));
+    $files->deleteDirectory(lang_path('vendor/example/da'));
 });
 
 it('errors when base locale not replacers not configured', function () {
     config()->set('translation-faker.replacers', []);
-    withoutMockingConsoleOutput();
     expect(fn () => artisan('translation:fake da'))
         ->toThrow(InvalidArgumentException::class);
 });
 
 it('can generate fake translation with default config', function () {
-    withoutMockingConsoleOutput();
     artisan('translation:fake da');
     expect(Artisan::output())->toMatchSnapshot();
     assertGeneratedFiles();
 });
 
 it('can generate fake translation with custom replacer config', function () {
-    withoutMockingConsoleOutput();
     config()->set('translation-faker.replacers.en', [
         'Quite' => 'Cheese',
         'sure' => 'Sandwich',
+        'Thank-you' => 'Congratulations',
+        'for' => 'on',
+        'purchase' => 'donation',
     ]);
 
     artisan('translation:fake da');
@@ -46,10 +50,11 @@ it('can generate fake translation with custom replacer config', function () {
 });
 
 it('can generate fake translation with custom base locale option long', function () {
-    withoutMockingConsoleOutput();
     config()->set('translation-faker.replacers.de', [
         'Ziemlich' => 'Cheese',
         'sicher' => 'sandwich',
+        'Vielen' => 'Orange',
+        'Dank' => 'Juice',
     ]);
 
     artisan('translation:fake da --baseLocale=de');
@@ -58,10 +63,11 @@ it('can generate fake translation with custom base locale option long', function
 });
 
 it('can generate fake translation with custom base locale option short', function () {
-    withoutMockingConsoleOutput();
     config()->set('translation-faker.replacers.de', [
         'Ziemlich' => 'Cheese',
         'sicher' => 'sandwich',
+        'Vielen' => 'Orange',
+        'Dank' => 'Juice',
     ]);
 
     artisan('translation:fake da -bde');

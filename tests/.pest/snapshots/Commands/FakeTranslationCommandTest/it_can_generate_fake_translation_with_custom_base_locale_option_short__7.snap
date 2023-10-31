@@ -1,4 +1,5 @@
 {
     "Quite sure we don't have a placeholder in this sentence.": "Cheese sandwich haben keinen Platzhalter in diesem Satz.",
-    "Quite sure we have a \":placeholder\" and a :different_placeholder and another in brackets (Something:something_placeholder).": "Cheese sandwich haben einen \":placeholder\" und einen :different_placeholder und einen anderen in Klammern (etwas:something_placeholder)."
+    "Quite sure we have a \":placeholder\" and a :different_placeholder and another in brackets (Something:something_placeholder).": "Cheese sandwich haben keinen \":placeholder\" und einen :different_placeholder und einen anderen in Klammern (etwas:something_placeholder).",
+    "Thank-you <strong>:name</strong> for your <a href=\":order_url\">purchase (Order ID: :order_id)</a>.": "Orange Juice <strong>:name</strong> für Ihren <a href=\":order_url\">Einkauf (Bestellnummer: :order_id)</a>."
 }
