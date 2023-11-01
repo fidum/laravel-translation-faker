@@ -13,14 +13,14 @@ beforeEach(function () {
 
 afterEach(function () {
     // Clean up files
-    $files = app(Filesystem::class);
+    $system = app(Filesystem::class);
 
     foreach (files() as $file) {
-        $files->delete($file);
+        $system->delete($file);
     }
 
-    $files->deleteDirectory(lang_path('da'));
-    $files->deleteDirectory(lang_path('vendor/example/da'));
+    $system->deleteDirectory(lang_path('da'));
+    $system->deleteDirectory(lang_path('vendor/example/da'));
 });
 
 it('errors when base locale not replacers not configured', function () {
@@ -42,6 +42,8 @@ it('can generate fake translation with custom replacer config', function () {
         'Thank-you' => 'Congratulations',
         'for' => 'on',
         'purchase' => 'donation',
+        ':placeholder' => 'SHOULD_NOT_BE_REPLACED',
+        '_placeholder' => 'SHOULD_NOT_BE_REPLACED',
     ]);
 
     artisan('translation:fake da');
@@ -55,6 +57,8 @@ it('can generate fake translation with custom base locale option long', function
         'sicher' => 'sandwich',
         'Vielen' => 'Orange',
         'Dank' => 'Juice',
+        ':placeholder' => 'SHOULD_NOT_BE_REPLACED',
+        '_placeholder' => 'SHOULD_NOT_BE_REPLACED',
     ]);
 
     artisan('translation:fake da --baseLocale=de');
@@ -68,6 +72,8 @@ it('can generate fake translation with custom base locale option short', functio
         'sicher' => 'sandwich',
         'Vielen' => 'Orange',
         'Dank' => 'Juice',
+        ':placeholder' => 'SHOULD_NOT_BE_REPLACED',
+        '_placeholder' => 'SHOULD_NOT_BE_REPLACED',
     ]);
 
     artisan('translation:fake da -bde');
