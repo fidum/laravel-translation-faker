@@ -1,5 +1,5 @@
 {
     "Quite sure we don't have a placeholder in this sentence.": "Cheese Sandwich we don't have a placeholder in this sentence.",
-    "Quite sure we have a \":placeholder\" and a :different_placeholder and another in brackets (Something:something_placeholder).": "Cheese Sandwich we have a \",:placeholder\", and another in brackets (Something:something_placeholder).",
+    "Quite sure we have a \":placeholder\" and a :different_placeholder and another in brackets (Something:something_placeholder).": "Cheese Sandwich we have a \":placeholder\" and a :different_placeholder and another in brackets (Something:something_placeholder).",
     "Thank-you <strong>:name</strong> for your <a href=\":order_url\">purchase (Order ID: :order_id)</a>.": "Congratulations <strong>:name</strong> on your <a href=\":order_url\">donation (Order ID: :order_id)</a>."
 }

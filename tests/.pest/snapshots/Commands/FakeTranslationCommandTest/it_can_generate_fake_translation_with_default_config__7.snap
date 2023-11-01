@@ -1,5 +1,5 @@
 {
     "Quite sure we don't have a placeholder in this sentence.": "Qüïtë sürë wë dön't hävë ä pläcëhöldër ïn thïs sëntëncë.",
-    "Quite sure we have a \":placeholder\" and a :different_placeholder and another in brackets (Something:something_placeholder).": "Qüïtë sürë wë hävë ä \",:placeholder\", änd änöthër ïn bräckëts (Sömëthïng:something_placeholder).",
+    "Quite sure we have a \":placeholder\" and a :different_placeholder and another in brackets (Something:something_placeholder).": "Qüïtë sürë wë hävë ä \":placeholder\" änd ä :different_placeholder änd änöthër ïn bräckëts (Sömëthïng:something_placeholder).",
     "Thank-you <strong>:name</strong> for your <a href=\":order_url\">purchase (Order ID: :order_id)</a>.": "Thänk-yöü <strong>:name</strong> för yöür <a href=\":order_url\">pürchäsë (Ördër ÏD: :order_id)</a>."
 }
