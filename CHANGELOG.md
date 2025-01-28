@@ -2,6 +2,15 @@
 
 All notable changes to `laravel-translation-faker` will be documented in this file.
 
+## 2.0.0 - 2025-01-28
+
+### What's Changed
+
+* Run tests on PHP 8.4 by @dmason30 in https://github.com/fidum/laravel-translation-faker/pull/12
+* Drop Laravel 10.x Support
+
+**Full Changelog**: https://github.com/fidum/laravel-translation-faker/compare/1.0.2...2.0.0
+
 ## 1.0.2 - 2024-03-05
 
 ### What's Changed
