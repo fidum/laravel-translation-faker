@@ -2,6 +2,14 @@
 
 All notable changes to `laravel-translation-faker` will be documented in this file.
 
+## 2.1.0 - 2025-02-24
+
+### What's Changed
+
+* Adds Laravel 12.x Support by @dmason30 in https://github.com/fidum/laravel-translation-faker/pull/14
+
+**Full Changelog**: https://github.com/fidum/laravel-translation-faker/compare/2.0.0...2.1.0
+
 ## 2.0.0 - 2025-01-28
 
 ### What's Changed
