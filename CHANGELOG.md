@@ -2,6 +2,14 @@
 
 All notable changes to `laravel-translation-faker` will be documented in this file.
 
+## 2.2.0 - 2026-07-15
+
+### What's Changed
+
+* Add support for Laravel 13 and PHP 8.5 by @dmason30 in https://github.com/fidum/laravel-translation-faker/pull/25
+
+**Full Changelog**: https://github.com/fidum/laravel-translation-faker/compare/2.1.0...2.2.0
+
 ## 2.1.0 - 2025-02-24
 
 ### What's Changed
